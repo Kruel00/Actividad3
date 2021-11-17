@@ -26,4 +26,7 @@ insert into criptomoneda values
 
 select * from criptomoneda
 
+insert into transaccion values ($cn,$tt,$cc,$pd,$st,$cm,$ttr); 
 
+insert into criptomoneda values 
+( 'BTH',59000),

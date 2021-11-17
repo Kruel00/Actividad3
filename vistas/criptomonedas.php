@@ -14,7 +14,6 @@ echo
             <td align='center'>Editar</td>
             <td align='center'>Borrar</td>
         </tr>
-        
     ";
 
     while ($row = sqlsrv_fetch_array($result))
