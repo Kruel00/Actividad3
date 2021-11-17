@@ -18,13 +18,13 @@
             <li><a href="index.php?nuevacripto=1">Nueva criptomeneda</a></li>
             <li><a href="index.php?nuevaTransaccion=1">Nueva transaccion</a></li>
             <li><a href="index.php?mostrarCriptomonedas=1">Criptomonedas aceptadas</a></li>
-            <li><a href="index.php?mostrarTransacciones=1">Mostrar transacciones</a></li>
         </ul>
     </div>
     
     <div class="body-page">
         <?php
         include('controladores/conectDB-local.php');
+        
 
         if (isset($_GET['nuevacripto'])) {
             include('vistas/registro_cripto.php');
@@ -38,7 +38,29 @@
         if (isset($_GET['mostrarTransacciones'])) {
             include('vistas/transacciones.php');
         }
-
+        if (isset($_GET['borrarTransac'])) {
+            $transaccionId = $_GET['borrarTransac'];
+            $borrarq = "delete from transaccion where transaccionId = $transaccionId";
+            sqlsrv_query($con, $borrarq);
+            //echo "<script>location.href='index.php';</script>";
+        }
+        if (isset($_GET['editarTransac'])) {
+            $SolicitudID = $_GET['editarTransac'];
+            include("vistas/editTransac.php");
+            //echo "<script>location.href='#editar';</script>";
+        }
+        if (isset($_GET['borrarCripto'])) {
+            $CriptomonedaId = $_GET['borrarCripto'];
+            $borrarq = "delete from criptomoneda where CriptomonedaId = $CriptomonedaId";
+            sqlsrv_query($con, $borrarq);
+            echo "<script>location.href='index.php?mostrarCriptomonedas=1';</script>";
+        }
+        if (isset($_GET['editarCripto'])) {
+            $SolicitudID = $_GET['editarCripto'];
+            include("vistas/editCripto.php");
+            //echo "<script>location.href='#editar';</script>";
+        }
+        
         //Registrar una nueva divisa en la base de datos
         if (isset($_POST['saveCrip'])) {
             $cn = $_POST['criptoName'];
@@ -46,7 +68,7 @@
             $insertconsult = "insert into criptomoneda values ('$cn',$cv);";
             $result = sqlsrv_query($con, $insertconsult);
             if ($result) {
-                echo "<script>location.href='index.php?criptoSaved=true';</script>";
+                echo "<script>location.href='index.php?mostrarCriptomonedas=1';</script>";
             } else {
                 echo "<script>location.href='index.php?criptoSaved=false';</script>";
             }
@@ -78,12 +100,17 @@
                     $ttr = $st - $cm;
                 }
 
-                echo "la valor final es: " . $ttr;
-            //echo "<script>location.href='index.php?criptoSaved=$st';</script>";
+                $consultNewCripto = "insert into transaccion values ($cn,$tt,$cc,$pd,$st,$cm,$ttr);";
+                $wrtTrans = sqlsrv_query($con, $consultNewCripto);
+                if($wrtTrans)
+                {
+                    echo "<script>location.href='index.php?saveTrans=true';</script>";
+                }
         }
-
+        include('vistas/transacciones.php');
         ?>
     </div>
+    
 </body>
 
 </html>

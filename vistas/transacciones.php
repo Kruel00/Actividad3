@@ -1,5 +1,5 @@
 <html>
-<h1>Lista de transacciones realizadas</h1>
+<h1>Lista de transacciones</h1>
 
 </html>
 
@@ -38,17 +38,17 @@ while ($row = sqlsrv_fetch_array($result)) {
     "<td align='center'>$row[0]</td>
             <td align='center'>$mn</td>
             <td align='center'>$cto</td>
-            <td align='center'>$$row[3]</td>
+            <td align='center'>$row[3]</td>
             <td align='center'>$$row[4]</td>
             <td align='center'>$$row[5]</td>
             <td align='center'>$$row[6]</td>
             <td align='center'>$$row[7]</td>
             <td align='center'><a href='index.php?editarTransac=$row[0]'>Editar</a></td>
             <td align='center'><a href='index.php?borrarTransac=$row[0]'>Borrar</a></td>
-            ";
+            </tr>";
 }
 echo "
-        </tr>
+        
     </table>"
 
 ?>

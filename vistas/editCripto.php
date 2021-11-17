@@ -1,6 +1,6 @@
 <html>
-<h1>Registro de criptomoneda</h1>
-<form action="index.php?mostrarCriptomonedas=1" method="POST">
+<h1>Editar criptomoneda</h1>
+<form action="" method="POST">
     <div class="form-control">
         <label for="txtCripto">Nombre de criptomoneda</label>
         <input type="text" name="criptoName" placeholder="Nombre de criptomoneda">
