@@ -12,7 +12,7 @@ if(isset($_GET['editarCripto']))
 
 <html>
 <h1>Editar criptomoneda</h1>
-<form action="" method="POST">
+<form action="../index.php?updateCript=<?php echo $valor; ?>" method="POST">
     <div class="form-control">
         <label for="txtCripto">Nombre de criptomoneda</label>
         <input type="text" name="criptoName" value='<?php echo $registro[1]; ?>'>
@@ -22,7 +22,7 @@ if(isset($_GET['editarCripto']))
         <input type="text" name="criptoValue" value='<?php echo $registro[2]; ?>'>
     </div>
     <div class="form-control">
-        <input type="submit" name="saveCrip" id="">
+        <input type="submit" name="updateCrip" id="">
     </div>
 </form>
 

@@ -21,11 +21,11 @@
             <li><a href="index.php?mostrarCriptomonedas=1">Criptomonedas aceptadas</a></li>
         </ul>
     </div>
-    
+
     <div class="body-page">
         <?php
         include('controladores/conectDB-local.php');
-        
+
 
         if (isset($_GET['nuevacripto'])) {
             include('vistas/registro_cripto.php');
@@ -65,7 +65,7 @@
             $SolicitudID = $_GET['editarCripto'];
             include("vistas/editCripto.php");
         }
-        
+
         //Registrar una nueva divisa en la base de datos
         if (isset($_POST['saveCrip'])) {
             $cn = $_POST['criptoName'];
@@ -79,52 +79,62 @@
             }
         }
 
-        if (isset($_POST['regTransaccion'])) {
-                $cn = intval($_POST['cripto']);
-                $tt = $_POST['tipoTransaccion'];
-                $cc = floatval($_POST['Cantidad']);
-                    $precioDivisa = "select tipoDeCambio from criptomoneda where CriptomonedaId = $cn;";
-                    $result = sqlsrv_query($con, $precioDivisa);
-                    $valor = sqlsrv_fetch_array($result);
-                $pd = floatval($valor['tipoDeCambio']);
-                $st = $pd * $cc;
+        //actualizar una divisa en la base de datos
+        if (isset($_POST['updateCrip'])) {
+            $cripId = $_GET['updateCript'];
 
-                if($st <1000)
-                {
-                    $cm = $st*.05;
-                }
-                else
-                {
-                    $cm = $st*.01;
-                }
-                 
-                if($tt == 0)
-                {
-                    $ttr = $st + $cm;
-                }
-                else
-                {
-                    $ttr = $st - $cm;
-                }
-                echo "Valores: " . "Criptomoneda=" . $cn .  " Tipo de transaccion=" . $tt . " Cantidad=" . $cc . " Precio de la divisa=" . $pd . " Sub-Total=" . $st . " Comision=" . $cm . " Total=".$ttr;
-                var_dump($pd);
-                $consultNewCripto = "insert into transaccion values ($cn,$tt,$cc,$pd,$st,$cm,$ttr);";
-                $wrtTrans = sqlsrv_query($con, $consultNewCripto);
-                echo $consultNewCripto;
-                if($wrtTrans)
-                {
-                    echo "<script>location.href='index.php?saveTrans=true';</script>";
-                }
-                else
-                {
-                    echo "<script>location.href='index.php?saveTrans=false';</script>";
-                }
+            $cn = $_POST['criptoName'];
+            $cv = floatval($_POST['criptoValue']) ;
+            $insertconsult = "update criptomoneda set nombre='$cn' , tipoDeCambio=$cv where CriptomonedaId=$cripId;";
+
+            $result = sqlsrv_query($con, $insertconsult);
+            echo $cripId ;
+
+            if ($result) {
+                //echo "<script>location.href='index.php?updated=true';</script>";
+            } else {
+                
+                //echo "<script>location.href='index.php?update=false';</script>";
+            }
+        }
+
+
+        if (isset($_POST['regTransaccion'])) {
+            $cn = intval($_POST['cripto']);
+            $tt = $_POST['tipoTransaccion'];
+            $cc = floatval($_POST['Cantidad']);
+            $precioDivisa = "select tipoDeCambio from criptomoneda where CriptomonedaId = $cn;";
+            $result = sqlsrv_query($con, $precioDivisa);
+            $valor = sqlsrv_fetch_array($result);
+            $pd = floatval($valor['tipoDeCambio']);
+            $st = $pd * $cc;
+
+            if ($st < 1000) {
+                $cm = $st * .05;
+            } else {
+                $cm = $st * .01;
+            }
+
+            if ($tt == 0) {
+                $ttr = $st + $cm;
+            } else {
+                $ttr = $st - $cm;
+            }
+            echo "Valores: " . "Criptomoneda=" . $cn .  " Tipo de transaccion=" . $tt . " Cantidad=" . $cc . " Precio de la divisa=" . $pd . " Sub-Total=" . $st . " Comision=" . $cm . " Total=" . $ttr;
+            var_dump($pd);
+            $consultNewCripto = "insert into transaccion values ($cn,$tt,$cc,$pd,$st,$cm,$ttr);";
+            $wrtTrans = sqlsrv_query($con, $consultNewCripto);
+            if ($wrtTrans) {
+                echo "<script>location.href='index.php?saveTrans=true';</script>";
+            } else {
+                echo "<script>location.href='index.php?saveTrans=false';</script>";
+            }
         }
 
         include('vistas/transacciones.php');
         ?>
     </div>
-    
+
 </body>
 
 </html>
