@@ -11,8 +11,9 @@
 
 <body>
     <div class="top-banner">
-        <h1>CRIPTOMONEDAS</h1>
+        <h1>CRIPTOMONEDAS <?php phpversion(); ?></h1>
     </div>
+
     <div class="top-menu">
         <ul>
             <li><a href="index.php?nuevacripto=1">Nueva criptomeneda</a></li>
@@ -29,36 +30,40 @@
         if (isset($_GET['nuevacripto'])) {
             include('vistas/registro_cripto.php');
         }
+
         if (isset($_GET['nuevaTransaccion'])) {
             include('vistas/registrar_transaccion.php');
         }
+
         if (isset($_GET['mostrarCriptomonedas'])) {
             include('vistas/criptomonedas.php');
         }
+
         if (isset($_GET['mostrarTransacciones'])) {
             include('vistas/transacciones.php');
         }
+
         if (isset($_GET['borrarTransac'])) {
             $transaccionId = $_GET['borrarTransac'];
             $borrarq = "delete from transaccion where transaccionId = $transaccionId";
             sqlsrv_query($con, $borrarq);
-            //echo "<script>location.href='index.php';</script>";
         }
+
         if (isset($_GET['editarTransac'])) {
             $SolicitudID = $_GET['editarTransac'];
             include("vistas/editTransac.php");
-            //echo "<script>location.href='#editar';</script>";
         }
+
         if (isset($_GET['borrarCripto'])) {
             $CriptomonedaId = $_GET['borrarCripto'];
             $borrarq = "delete from criptomoneda where CriptomonedaId = $CriptomonedaId";
             sqlsrv_query($con, $borrarq);
             echo "<script>location.href='index.php?mostrarCriptomonedas=1';</script>";
         }
+
         if (isset($_GET['editarCripto'])) {
             $SolicitudID = $_GET['editarCripto'];
             include("vistas/editCripto.php");
-            //echo "<script>location.href='#editar';</script>";
         }
         
         //Registrar una nueva divisa en la base de datos
@@ -75,14 +80,15 @@
         }
 
         if (isset($_POST['regTransaccion'])) {
-                $cn = $_POST['cripto'];
+                $cn = intval($_POST['cripto']);
                 $tt = $_POST['tipoTransaccion'];
-                $cc = $_POST['Cantidad'];
-                    $precioDivisa = "select tipoDeCambio from criptomoneda where  CriptomonedaId = $cn;";
+                $cc = floatval($_POST['Cantidad']);
+                    $precioDivisa = "select tipoDeCambio from criptomoneda where CriptomonedaId = $cn;";
                     $result = sqlsrv_query($con, $precioDivisa);
                     $valor = sqlsrv_fetch_array($result);
-                $pd = $valor['tipoDeCambio'];
+                $pd = floatval($valor['tipoDeCambio']);
                 $st = $pd * $cc;
+
                 if($st <1000)
                 {
                     $cm = $st*.05;
@@ -91,6 +97,7 @@
                 {
                     $cm = $st*.01;
                 }
+                 
                 if($tt == 0)
                 {
                     $ttr = $st + $cm;
@@ -99,14 +106,21 @@
                 {
                     $ttr = $st - $cm;
                 }
-
+                echo "Valores: " . "Criptomoneda=" . $cn .  " Tipo de transaccion=" . $tt . " Cantidad=" . $cc . " Precio de la divisa=" . $pd . " Sub-Total=" . $st . " Comision=" . $cm . " Total=".$ttr;
+                var_dump($pd);
                 $consultNewCripto = "insert into transaccion values ($cn,$tt,$cc,$pd,$st,$cm,$ttr);";
                 $wrtTrans = sqlsrv_query($con, $consultNewCripto);
+                echo $consultNewCripto;
                 if($wrtTrans)
                 {
                     echo "<script>location.href='index.php?saveTrans=true';</script>";
                 }
+                else
+                {
+                    echo "<script>location.href='index.php?saveTrans=false';</script>";
+                }
         }
+
         include('vistas/transacciones.php');
         ?>
     </div>

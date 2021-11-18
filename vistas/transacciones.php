@@ -34,6 +34,7 @@ while ($row = sqlsrv_fetch_array($result)) {
     } else {
         $cto = "Venta";
     }
+
     echo
     "<td align='center'>$row[0]</td>
             <td align='center'>$mn</td>
@@ -43,7 +44,7 @@ while ($row = sqlsrv_fetch_array($result)) {
             <td align='center'>$$row[5]</td>
             <td align='center'>$$row[6]</td>
             <td align='center'>$$row[7]</td>
-            <td align='center'><a href='index.php?editarTransac=$row[0]'>Editar</a></td>
+            <td align='center'><a href='vistas/editTransac.php?editarTransac=$row[0]'>Editar</a></td>
             <td align='center'><a href='index.php?borrarTransac=$row[0]'>Borrar</a></td>
             </tr>";
 }

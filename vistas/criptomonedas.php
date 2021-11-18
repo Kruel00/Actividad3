@@ -23,7 +23,7 @@ echo
             <td align='center'>$row[0]</td>
             <td align='center'>$row[1]</td>
             <td align='center'>$row[2]</td>
-            <td align='center'><a href='index.php?editarCripto=$row[0]'>Editar</a></td>
+            <td align='center'><a href='vistas/editcripto.php?editarCripto=$row[0]'>Editar</a></td>
             <td align='center'><a href='index.php?borrarCripto=$row[0]'>Borrar</a></td>
             ";
     }
