@@ -27,7 +27,7 @@ if(isset($_GET['editarTransac']))
 <html>
 <h1>Editar transaccion <?php echo $valor ?></h1>
 <div class="form-area">
-    <form action="../index.php" method="POST">
+    <form action="../index.php?updateTransac=<?php echo $valor; ?>" method="POST">
         <div class="form-control">
             <label for="">Seleccione criptomoneda</label>
             <select name="cripto" id="criptomoneda">
@@ -49,7 +49,7 @@ if(isset($_GET['editarTransac']))
             <label for="txtCantidad">Cantidad de criptomonedas</label>
             <input type="text" name="Cantidad" value = <?php echo $registro[3]; ?> id="txtCantidad">
         </div>
-        <input type="submit" name="regTransaccion" id="">
+        <input type="submit" name="updateTransaccion" id="">
     </form>
 
     <button onclick="window.location='../index.php'">Cancelar</button>
