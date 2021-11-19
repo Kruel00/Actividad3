@@ -1,8 +1,8 @@
 <?php
-$servername = "es172006048.database.windows.net";
+$servername = "localhost";
 $database = "financierachavez";
-$username = "jcastorena";
-$pass = "Cast0rena!@#";
+$username = "fuser";
+$pass = "1234";
 $conectionInfo = array("Database" => $database, "UID" => $username, "PWD" => $pass, 'CharacterSet' => 'UTF-8');
 $con = sqlsrv_connect($servername, $conectionInfo);
 ?>
