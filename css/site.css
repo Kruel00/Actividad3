@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    font-size: 100%;
+    font-family: 'Courier New', Courier, monospace;
 } 
 
 
@@ -19,11 +19,101 @@
 #transac tr:nth-child(even){background-color: #f2f2f2;}
 
 #transac tr:hover {background-color: #ddd;}
-transac
+
+
 #transac th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #04AA6D;
+  background-color: #636464;
   color: white;
+}
+
+.page-content
+{
+  display: flex;
+  flex-direction: row;
+}
+
+.page-content .body-page
+{
+  width: 100%;
+  background-color: rgb(110, 110, 110);
+}
+
+.page-content .side-menu
+{
+  width: 10%;
+}
+
+.top-banner h1{
+  color: rgb(0, 0, 0);
+  font-size: 4em;
+  padding-left: 1em;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: rgb(209, 209, 209);
+  border: blanchedalmond solid 1px;
+}
+
+.side-menu{
+  background-color: rgb(204, 204, 204);
+  color: rgb(0, 0, 0);
+  padding: 1%;
+  border: honeydew solid 1px;
+}
+
+.side-menu a{
+  color: rgb(3, 52, 95);
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+.include-tittle{
+  height: 2em;
+  font-size: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: rgb(255, 255, 255);
+  margin-top: 50px;
+}
+
+.form-area{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(212, 212, 212);
+  padding: 1%;
+  align-items: left ;
+}
+
+.form-area *{
+  width: 60%;
+  padding: 5px;
+  border-radius: 0;
+  margin-bottom: 4px;
+}
+
+.form-area input{
+
+  border: 0;
+}
+
+
+.body-page .tittle-incl {
+background-color: honeydew;
+}
+
+.tittle-side-menu{
+  font-size: 30px;
+  color: red;
+}
+
+.side-menu ul li{
+  padding: 3px;
+}
+
+.cancel-button button{
+  width:  200px;
+}
+
+
+.form-area #enviarlo{
+  width:  200px;
 }

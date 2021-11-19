@@ -18,8 +18,8 @@ CREATE TABLE transaccion(
 
 
 insert into criptomoneda values 
-( 'BTH',59000),
-( 'ETH',3923),
+( 'BTC',59000),
+( 'ETH',3923.08),
 ( 'XRP',1.5597),
 ( 'DODGE',0.7021);
 

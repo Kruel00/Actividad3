@@ -1,10 +1,11 @@
 <html>
-<h1>Lista de transacciones</h1>
+<div class="include-tittle">
+    <h1>Lista de transacciones</h1>
+</div>
 
 </html>
 
 <?php
-
 $insertconsult = "select * from transaccion";
 $result = sqlsrv_query($con, $insertconsult);
 echo
@@ -49,7 +50,6 @@ while ($row = sqlsrv_fetch_array($result)) {
             </tr>";
 }
 echo "
-        
     </table>"
 
 ?>

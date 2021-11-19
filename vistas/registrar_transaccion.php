@@ -14,11 +14,16 @@ while ($row = sqlsrv_fetch_array($result)) {
 
 ?>
 <html>
-<h1>Nueva transaccion</h1>
+<div class="tittle-incl">
+    <h1>Nueva transaccion</h1>
+</div>
+
 <div class="form-area">
     <form action="index.php" method="POST">
         <div class="form-control">
-            <label for="">Seleccione criptomoneda</label>
+            <div class="form-label">
+                <label for="">Seleccione criptomoneda</label>
+            </div>
             <select name="cripto" id="criptomoneda">
                 <?php
                 foreach ($crptomonedas as $cripto) {
@@ -27,21 +32,28 @@ while ($row = sqlsrv_fetch_array($result)) {
                 ?>
             </select>
         </div>
-        <div class="form-control">
+        <div class="form-label">
             <label for="">Tipo de transaccion</label>
+        </div>
+        <div class="form-control">
             <select name="tipoTransaccion" id="">
                 <option value="0">Vender</option>
                 <option value="1">comprar</option>
             </select>
         </div>
-        <div class="form-control">
+
+        <div class="form-label">
             <label for="txtCantidad">Cantidad de criptomonedas</label>
+        </div>
+        <div class="form-control">
             <input type="text" name="Cantidad" id="txtCantidad">
         </div>
-        <input type="submit" name="regTransaccion" id="">
+        <input type="submit" name="regTransaccion" value="Realizar tranzaccion" id="enviarlo">
     </form>
+    <div class="cancel-button">
+        <button onclick="window.location='index.php'">Cancelar</button>
+    </div>
 
-    <button onclick="window.location='index.php'">Cancelar</button>
 </div>
 
 </html>
